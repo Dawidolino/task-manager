@@ -1,3 +1,15 @@
 .full-width {
     width: 100%;
 }
+
+.half-width {
+    width: calc(50% - 8px);
+    margin-right: 16px;
+}
+
+@media (max-width: 600px) {
+    .half-width {
+        width: 100%;
+        margin-right: 0;
+    }
+}
