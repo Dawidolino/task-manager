@@ -1,31 +1,33 @@
-<mat-card>
-    <form [formGroup]="taskForm" (ngSubmit)="addTask()">
-        <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Tytuł</mat-label>
-            <input matInput formControlName="title" />
-        </mat-form-field>
+<div @slideIn>
+    <mat-card>
+        <form [formGroup]="taskForm" (ngSubmit)="addTask()">
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Tytuł</mat-label>
+                <input matInput formControlName="title" />
+            </mat-form-field>
 
-        <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Opis</mat-label>
-            <textarea matInput formControlName="description"></textarea>
-        </mat-form-field>
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Opis</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+            </mat-form-field>
 
-        <!-- select date -->
-        <mat-form-field appearance="fill" class="half-width">
-            <mat-label>Data wykonania</mat-label>
-            <input matInput [matDatepicker]="datePicker" formControlName="dueDateDate" />
-            <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
-            <mat-datepicker #datePicker></mat-datepicker>
-        </mat-form-field>
+            <!-- select date -->
+            <mat-form-field appearance="fill" class="half-width">
+                <mat-label>Data wykonania</mat-label>
+                <input matInput [matDatepicker]="datePicker" formControlName="dueDateDate" />
+                <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                <mat-datepicker #datePicker></mat-datepicker>
+            </mat-form-field>
 
-        <!-- select time -->
-        <mat-form-field appearance="fill" class="half-width">
-            <mat-label>Godzina wykonania</mat-label>
-            <input matInput type="time" formControlName="dueDateTime" />
-        </mat-form-field>
+            <!-- select time -->
+            <mat-form-field appearance="fill" class="half-width">
+                <mat-label>Godzina wykonania</mat-label>
+                <input matInput type="time" formControlName="dueDateTime" />
+            </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit" [disabled]="taskForm.invalid">
-            Dodaj zadanie
-        </button>
-    </form>
-</mat-card>
+            <button mat-raised-button color="primary" type="submit" [disabled]="taskForm.invalid">
+                Dodaj zadanie
+            </button>
+        </form>
+    </mat-card>
+</div>
