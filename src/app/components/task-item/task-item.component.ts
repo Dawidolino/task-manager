@@ -15,6 +15,15 @@ import { trigger, transition, style, animate } from '@angular/animations';
         style({ opacity: 0 }),
         animate('300ms ease-out', style({ opacity: 1 }))
       ])
+    ]),
+    trigger('expandEdit', [
+      transition(':enter', [
+        style({ height: 0, opacity: 0 }),
+        animate('250ms ease-out', style({ height: '*', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({ height: 0, opacity: 0 }))
+      ])
     ])
   ]
 })

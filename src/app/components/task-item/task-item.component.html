@@ -21,7 +21,7 @@
     </ng-container>
 
     <ng-template #editTpl>
-        <form [formGroup]="editForm" class="edit-form">
+        <form [@expandEdit] [formGroup]="editForm" class="edit-form">
             <mat-form-field appearance="fill" class="full-width">
                 <mat-label>Tytuł</mat-label>
                 <input matInput formControlName="title" />
