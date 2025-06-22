@@ -1,0 +1,10 @@
+<ng-container *ngIf="tasks$ | async as tasks">
+    <mat-card *ngIf="tasks.length === 0" class="empty-card">
+        <p>Brak zadań.</p>
+    </mat-card>
+
+    <ng-container *ngFor="let t of tasks">
+        <app-task-item [task]="t" (delete)="onDelete($event)">
+        </app-task-item>
+    </ng-container>
+</ng-container>

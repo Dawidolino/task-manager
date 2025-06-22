@@ -1,4 +1,48 @@
-/* You can add global styles to this file, and also import other style files */
+/* cała aplikacja na jasnym tle */
+body {
+    background: #f5f5f5;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* centrowany główny kontener */
+.container {
+    max-width: 800px;
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+/* styl mat-card: zaokrąglone narożniki, cień, margines */
+mat-card {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+}
+
+/* tytuły w listach trochę większe i pogrubione */
+mat-card-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* przyciski w navbar */
+mat-toolbar button {
+    margin-left: 8px;
+    color: white;
+}
+
+/* formularz dodawania */
+app-add-task mat-card {
+    padding: 16px;
+}
+
+/* task-item: nieco większa przerwa między elementami */
+.task-card {
+    margin: 12px 0;
+}
+
+/* przyciski akcji w karcie wyrównane w prawo */
+mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+}

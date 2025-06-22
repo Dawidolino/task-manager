@@ -1,0 +1,45 @@
+<mat-card class="task-card" [@fadeIn]>
+    <ng-container *ngIf="!editMode; else editTpl">
+        <mat-card-title>{{ task.title }}</mat-card-title>
+        <mat-card-subtitle>
+            {{ task.dueDate | date:'shortDate' }} &mdash; {{ getRemaining() }}
+        </mat-card-subtitle>
+        <mat-card-content>{{ task.description }}</mat-card-content>
+        <mat-card-actions>
+            <button mat-icon-button color="primary" (click)="toggleEdit()">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="onDelete()">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-card-actions>
+    </ng-container>
+
+    <ng-template #editTpl>
+        <form [formGroup]="editForm" class="edit-form">
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Tytuł</mat-label>
+                <input matInput formControlName="title" />
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Opis</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Data wykonania</mat-label>
+                <input matInput formControlName="dueDate" [matDatepicker]="picker" />
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-card-actions>
+                <button mat-button color="primary" (click)="save()" [disabled]="editForm.invalid">
+                    Zapisz
+                </button>
+                <button mat-button (click)="cancel()">Anuluj</button>
+            </mat-card-actions>
+        </form>
+    </ng-template>
+</mat-card>

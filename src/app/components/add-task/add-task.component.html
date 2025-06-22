@@ -1,0 +1,24 @@
+<mat-card>
+    <form [formGroup]="taskForm" (ngSubmit)="addTask()">
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Tytuł</mat-label>
+            <input matInput formControlName="title" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Opis</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Data wykonania</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dueDate" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="taskForm.invalid">
+            Dodaj zadanie
+        </button>
+    </form>
+</mat-card>
