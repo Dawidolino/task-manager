@@ -37,20 +37,37 @@ export class TaskItemComponent {
 
   toggleEdit(): void {
     this.editMode = true;
+
+    // prepare hour in HH:mm format
+    const d = this.task.dueDate ?? new Date();
+    const hh = d.getHours().toString().padStart(2, '0');
+    const mm = d.getMinutes().toString().padStart(2, '0');
+
     this.editForm = this.fb.group({
       title: [this.task.title, Validators.required],
       description: [this.task.description],
-      dueDate: [this.task.dueDate ?? null, Validators.required]
+      dueDateDate: [this.task.dueDate ?? null, Validators.required],
+      dueDateTime: [`${hh}:${mm}`, Validators.required]
     });
   }
 
   save(): void {
-    if (!this.editForm.valid) return;
+    if (this.editForm.invalid) return;
 
-    const { title, description, dueDate } = this.editForm.value;
+    const { title, description, dueDateDate, dueDateTime } = this.editForm.value;
+    // combine date and time into a single JS Date
+    const newDate = new Date(dueDateDate);
+    const [hour, minute] = dueDateTime.split(':').map((n: string) => parseInt(n, 10));
+    newDate.setHours(hour, minute, 0, 0);
+
     this.taskService
-      .updateTask(this.task.id, { title, description, dueDate })
+      .updateTask(this.task.id, { title, description, dueDate: newDate })
       .then(() => {
+        // local update to see the changes immediately
+        this.task.title = title;
+        this.task.description = description;
+        this.task.dueDate = newDate;
+
         this.snackBar.open('Zadanie zaktualizowane', 'OK', { duration: 2000 });
         this.editMode = false;
       });
@@ -60,16 +77,11 @@ export class TaskItemComponent {
     this.editMode = false;
   }
 
-  // Oblicza pozostały czas – jeśli brak dueDate, zwraca pusty string
   getRemaining(): string {
-    if (!this.task.dueDate) {
-      return '';
-    }
+    if (!this.task.dueDate) return '';
     const now = new Date();
     const diff = this.task.dueDate.getTime() - now.getTime();
-    if (diff <= 0) {
-      return '🚨 po terminie';
-    }
+    if (diff <= 0) return '🚨 po terminie';
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));

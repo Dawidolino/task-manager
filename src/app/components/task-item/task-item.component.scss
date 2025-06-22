@@ -1,20 +1,42 @@
-.task-card {
-    margin: 12px 0;
-    padding: 16px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
 }
 
-.task-card mat-card-title {
-    margin: 0 0 8px 0;
+.task-date {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.task-remaining {
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .full-width {
     width: 100%;
 }
 
+.half-width {
+    width: calc(50% - 8px);
+}
+
+@media (max-width: 600px) {
+    .half-width {
+        width: 100%;
+    }
+}
+
+.edit-datetime {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
 .edit-form {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
 }

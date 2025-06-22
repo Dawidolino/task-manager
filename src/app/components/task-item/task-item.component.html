@@ -1,9 +1,14 @@
 <mat-card class="task-card" [@fadeIn]>
     <ng-container *ngIf="!editMode; else editTpl">
+        <div class="task-header">
+            <div class="task-date">
+                {{ task.dueDate | date:'yyyy-MM-dd HH:mm' }}
+            </div>
+            <div class="task-remaining">
+                {{ getRemaining() }}
+            </div>
+        </div>
         <mat-card-title>{{ task.title }}</mat-card-title>
-        <mat-card-subtitle>
-            {{ task.dueDate | date:'shortDate' }} &mdash; {{ getRemaining() }}
-        </mat-card-subtitle>
         <mat-card-content>{{ task.description }}</mat-card-content>
         <mat-card-actions>
             <button mat-icon-button color="primary" (click)="toggleEdit()">
@@ -27,12 +32,19 @@
                 <textarea matInput formControlName="description"></textarea>
             </mat-form-field>
 
-            <mat-form-field appearance="fill" class="full-width">
-                <mat-label>Data wykonania</mat-label>
-                <input matInput formControlName="dueDate" [matDatepicker]="picker" />
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
+            <div class="edit-datetime">
+                <mat-form-field appearance="fill" class="half-width">
+                    <mat-label>Data wykonania</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dueDateDate" />
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="half-width">
+                    <mat-label>Godzina</mat-label>
+                    <input matInput type="time" formControlName="dueDateTime" />
+                </mat-form-field>
+            </div>
 
             <mat-card-actions>
                 <button mat-button color="primary" (click)="save()" [disabled]="editForm.invalid">
